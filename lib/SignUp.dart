@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:form_field_validator/form_field_validator.dart';
-
+import 'package:firebase_auth/firebase_auth.dart';
 class SignUpPage extends StatefulWidget {
   @override
   _SignUpPageState createState() => _SignUpPageState();
@@ -12,11 +12,14 @@ class _SignUpPageState extends State<SignUpPage> {
   TextEditingController _emailControl = TextEditingController();
   TextEditingController passwordControl = TextEditingController();
   TextEditingController confirmPasswordControl = TextEditingController();
+  FirebaseAuth auth = FirebaseAuth.instance;
+  
   
 
 
   @override
   Widget build(BuildContext context) {
+
   var password =passwordControl; 
   var confirmPassword=confirmPasswordControl;
 
@@ -120,8 +123,7 @@ class _SignUpPageState extends State<SignUpPage> {
                         RaisedButton(
                           onPressed: () {
                             if(_formKey.currentState.validate()){
-                              //TODO:" send the user data to firebase"
-                            }
+                                                    }
                           },
                           child: Container(
                             width: 120,

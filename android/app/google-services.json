@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "664500696985",
+    "firebase_url": "https://flutterloginandsignup.firebaseio.com",
+    "project_id": "flutterloginandsignup",
+    "storage_bucket": "flutterloginandsignup.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:664500696985:android:91f8684ae8b21319ff4508",
+        "android_client_info": {
+          "package_name": "com.example.rabin"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "664500696985-kgrtn2b793m7nc3sl2mv1tomq62rcvtt.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCC8jddDbbCvRdUN3F5fGlqVzyjHVq3MWw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "664500696985-kgrtn2b793m7nc3sl2mv1tomq62rcvtt.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
