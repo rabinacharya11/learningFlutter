@@ -12,10 +12,11 @@ void main() {
 }
 
 class HomePage extends StatelessWidget {
-  final Future<FirebaseApp> _initialization = Firebase.initializeApp();
 
   @override
   Widget build(BuildContext context) {
+    final Future<FirebaseApp> _initialization = Firebase.initializeApp();
+
     return FutureBuilder(
         // Initialize FlutterFire:
         future: _initialization,
