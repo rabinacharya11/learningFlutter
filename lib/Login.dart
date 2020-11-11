@@ -11,7 +11,8 @@ class _LoginPageState extends State<LoginPage> {
   GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   TextEditingController _emailController = TextEditingController();
   TextEditingController _passwordController = TextEditingController();
-
+  String _email;
+  String _password;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -47,6 +48,7 @@ class _LoginPageState extends State<LoginPage> {
                         ),
                         TextFormField(
                           controller: _emailController,
+                          onSaved: (value)=>_email,
                           validator: MultiValidator([
                             RequiredValidator(errorText: "Required*"),
                             EmailValidator(errorText: "Enter a valid email!")
@@ -69,6 +71,7 @@ class _LoginPageState extends State<LoginPage> {
                                     "Password must not exceed 15 characters")
                           ]),
                           obscureText: true,
+                          onSaved: (value)=>_password,
                           decoration: InputDecoration(
                               fillColor: Colors.pink,
                               border: OutlineInputBorder(),
@@ -78,11 +81,14 @@ class _LoginPageState extends State<LoginPage> {
                           height: 10,
                         ),
                         RaisedButton(
-                          onPressed: () { 
-                            Navigator.pushReplacement(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => Home()));
+                          onPressed: () {
+                            if (_formKey.currentState.validate()) {
+                             
+                              Navigator.pushReplacement(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => Home()));
+                            }
                           },
                           child: Container(
                             width: 120,

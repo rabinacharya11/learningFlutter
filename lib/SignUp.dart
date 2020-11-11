@@ -118,7 +118,11 @@ class _SignUpPageState extends State<SignUpPage> {
                           height: 10,
                         ),
                         RaisedButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            if(_formKey.currentState.validate()){
+                              //TODO:" send the user data to firebase"
+                            }
+                          },
                           child: Container(
                             width: 120,
                             child: ListTile(
