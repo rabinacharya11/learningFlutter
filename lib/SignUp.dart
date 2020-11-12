@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:form_field_validator/form_field_validator.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:rabin/HomePage.dart';
+import 'package:rabin/Login.dart';
 
 class SignUpPage extends StatefulWidget {
   @override
@@ -17,8 +18,17 @@ class _SignUpPageState extends State<SignUpPage> {
 
   Future<void> _createUser() async {
     try {
-      UserCredential userCredential =
-          await FirebaseAuth.instance.signInAnonymously();
+      UserCredential userCredential = await FirebaseAuth.instance
+          .createUserWithEmailAndPassword(
+              email: _emailControl.text, password: passwordControl.text);
+    } on FirebaseAuthException catch (e) {
+      if (e.code == "weak-password") {
+        print(
+            "the password you have entered is weak!"); //here ifpossible insert the alert dailog box printing the error message
+      } else if (e.code == "email-already-in-use") {
+        print(
+            "The Email you have entered is already in use"); //here if possible insert the alert dialog box printing the error message
+      }
     } catch (e) {
       print("$e");
     }
@@ -118,7 +128,13 @@ class _SignUpPageState extends State<SignUpPage> {
                         ),
                         RaisedButton(
                           onPressed: () {
-                            if (_formKey.currentState.validate()) {}
+                            if (_formKey.currentState.validate()) {
+                              _createUser();
+                             Navigator.pushReplacement(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => LoginPage()));
+                            }
                           },
                           child: Container(
                             width: 120,
@@ -140,12 +156,12 @@ class _SignUpPageState extends State<SignUpPage> {
                         ),
                         RaisedButton(
                           onPressed: () {
-                            _createUser();
-                            print("success");
+                            
+                            
                             Navigator.pushReplacement(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context)=> Home()));
+                                    builder: (context) => LoginPage()));
                           },
                           child: Container(
                             width: 120,

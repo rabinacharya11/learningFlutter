@@ -1,6 +1,9 @@
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:rabin/HomePage.dart';
 import 'package:form_field_validator/form_field_validator.dart';
+import 'package:rabin/SignUp.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -11,8 +14,13 @@ class _LoginPageState extends State<LoginPage> {
   GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   TextEditingController _emailController = TextEditingController();
   TextEditingController _passwordController = TextEditingController();
-  String _email;
-  String _password;
+  FirebaseAuth firebaseAuth = FirebaseAuth.instance;
+
+  Future<void> _signInUser() async {
+    await firebaseAuth.signInWithEmailAndPassword(
+        email: _emailController.text, password: _passwordController.text);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -48,7 +56,6 @@ class _LoginPageState extends State<LoginPage> {
                         ),
                         TextFormField(
                           controller: _emailController,
-                          onSaved: (value)=>_email,
                           validator: MultiValidator([
                             RequiredValidator(errorText: "Required*"),
                             EmailValidator(errorText: "Enter a valid email!")
@@ -71,7 +78,6 @@ class _LoginPageState extends State<LoginPage> {
                                     "Password must not exceed 15 characters")
                           ]),
                           obscureText: true,
-                          onSaved: (value)=>_password,
                           decoration: InputDecoration(
                               fillColor: Colors.pink,
                               border: OutlineInputBorder(),
@@ -83,7 +89,7 @@ class _LoginPageState extends State<LoginPage> {
                         RaisedButton(
                           onPressed: () {
                             if (_formKey.currentState.validate()) {
-                             
+                              _signInUser();
                               Navigator.pushReplacement(
                                   context,
                                   MaterialPageRoute(
@@ -110,7 +116,10 @@ class _LoginPageState extends State<LoginPage> {
                         ),
                         RaisedButton(
                           onPressed: () {
-                            print(_emailController);
+                            Navigator.pushReplacement(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => SignUpPage()));
                           },
                           child: Container(
                             width: 120,
