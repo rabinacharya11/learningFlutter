@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:form_field_validator/form_field_validator.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:rabin/HomePage.dart';
+
 class SignUpPage extends StatefulWidget {
   @override
   _SignUpPageState createState() => _SignUpPageState();
-  
 }
 
 class _SignUpPageState extends State<SignUpPage> {
@@ -13,19 +14,19 @@ class _SignUpPageState extends State<SignUpPage> {
   TextEditingController passwordControl = TextEditingController();
   TextEditingController confirmPasswordControl = TextEditingController();
   FirebaseAuth auth = FirebaseAuth.instance;
-  
-  
 
+  Future<void> _createUser() async {
+    try {
+      UserCredential userCredential =
+          await FirebaseAuth.instance.signInAnonymously();
+    } catch (e) {
+      print("$e");
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
-
-  var password =passwordControl; 
-  var confirmPassword=confirmPasswordControl;
-
-    
     return Scaffold(
-      
       appBar: AppBar(
         backgroundColor: Colors.purple,
         title: Text(
@@ -97,7 +98,7 @@ class _SignUpPageState extends State<SignUpPage> {
                           cursorColor: Colors.black,
                           controller: confirmPasswordControl,
                           cursorHeight: 30,
-                          validator:MultiValidator([
+                          validator: MultiValidator([
                             RequiredValidator(errorText: "Required*"),
                             MinLengthValidator(6,
                                 errorText:
@@ -106,11 +107,6 @@ class _SignUpPageState extends State<SignUpPage> {
                                 errorText:
                                     "Password must not exceed 15 characters")
                           ]),
-                            
-                        
-                            
-                        
-                        
                           obscureText: true,
                           decoration: InputDecoration(
                               fillColor: Colors.pink,
@@ -122,8 +118,7 @@ class _SignUpPageState extends State<SignUpPage> {
                         ),
                         RaisedButton(
                           onPressed: () {
-                            if(_formKey.currentState.validate()){
-                                                    }
+                            if (_formKey.currentState.validate()) {}
                           },
                           child: Container(
                             width: 120,
@@ -144,7 +139,14 @@ class _SignUpPageState extends State<SignUpPage> {
                           height: 5,
                         ),
                         RaisedButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            _createUser();
+                            print("success");
+                            Navigator.pushReplacement(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context)=> Home()));
+                          },
                           child: Container(
                             width: 120,
                             child: ListTile(
