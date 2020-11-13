@@ -1,5 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
+// import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:rabin/HomePage.dart';
 import 'package:form_field_validator/form_field_validator.dart';
@@ -16,6 +16,7 @@ class _LoginPageState extends State<LoginPage> {
   TextEditingController _passwordController = TextEditingController();
   FirebaseAuth firebaseAuth = FirebaseAuth.instance;
 
+  // ignore: unused_element
   Future<void> _signInUser() async {
     await firebaseAuth.signInWithEmailAndPassword(
         email: _emailController.text, password: _passwordController.text);
@@ -90,7 +91,7 @@ class _LoginPageState extends State<LoginPage> {
                           onPressed: () {
                             if (_formKey.currentState.validate()) {
                               _signInUser();
-                              Navigator.pushReplacement(
+                              Navigator.push(
                                   context,
                                   MaterialPageRoute(
                                       builder: (context) => Home()));

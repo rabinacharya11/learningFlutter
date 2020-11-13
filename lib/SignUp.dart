@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:form_field_validator/form_field_validator.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:rabin/HomePage.dart';
+import 'package:toast/toast.dart';
 import 'package:rabin/Login.dart';
 
 class SignUpPage extends StatefulWidget {
@@ -130,10 +130,13 @@ class _SignUpPageState extends State<SignUpPage> {
                           onPressed: () {
                             if (_formKey.currentState.validate()) {
                               _createUser();
-                             Navigator.pushReplacement(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => LoginPage()));
+                              Toast.show("Creating your account.....", context,
+                                  duration: Toast.LENGTH_SHORT,
+                                  gravity: Toast.BOTTOM);
+                              Navigator.pushReplacement(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => LoginPage()));
                             }
                           },
                           child: Container(
@@ -156,8 +159,7 @@ class _SignUpPageState extends State<SignUpPage> {
                         ),
                         RaisedButton(
                           onPressed: () {
-                            
-                            
+                            Toast.show("Login Now!", context);
                             Navigator.pushReplacement(
                                 context,
                                 MaterialPageRoute(

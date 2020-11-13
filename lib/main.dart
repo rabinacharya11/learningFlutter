@@ -1,8 +1,13 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:rabin/Login.dart';
-import 'package:rabin/SignUp.dart';
+// import 'package:rabin/checkPoint.dart';
+// import 'package:rabin/HomePage.dart';
+// import 'package:rabin/Login.dart';
+// import 'package:rabin/SignUp.dart';
+import 'package:rabin/getStarted.dart';
+
+import 'HomePage.dart';
 
 void main() {
   runApp(MaterialApp(
@@ -20,6 +25,7 @@ class HomePage extends StatelessWidget {
     return FutureBuilder(
         // Initialize FlutterFire:
         future: _initialization,
+        // ignore: missing_return
         builder: (context, snapshot) {
           // Check for errors
           if (snapshot.hasError) {
@@ -33,102 +39,17 @@ class HomePage extends StatelessWidget {
                 // ignore: missing_return
                 builder: (context, snapshot) {
                   if (snapshot.connectionState == ConnectionState.active) {
-                    User user = snapshot.data;
-                    if (user == null) {
-                      return Container(
-                          decoration: BoxDecoration(
-                              gradient: LinearGradient(
-                                  colors: [Colors.red, Colors.blue])),
-                          child: Scaffold(
-                            backgroundColor: Colors.blue,
-                            body: SafeArea(
-                              child: Center(
-                                child: Center(
-                                  child: Column(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.center,
-                                    children: [
-                                      Center(
-                                        child: Container(
-                                          child: Icon(
-                                            Icons.people_rounded,
-                                            size: 90,
-                                          ),
-                                        ),
-                                      ),
-                                      SizedBox(
-                                        height: 10,
-                                      ),
-                                      Center(
-                                        child: RaisedButton(
-                                            onPressed: () {
-                                              Navigator.push(
-                                                  context,
-                                                  MaterialPageRoute(
-                                                      builder: (context) =>
-                                                          LoginPage()));
-                                            }, //here set the code to make the user navigate to the login in Screen
-                                            child: Expanded(
-                                              child: Container(
-                                                width: 250,
-                                                child: ListTile(
-                                                  leading: Icon(Icons.person),
-                                                  title: Text(
-                                                    "Log In",
-                                                    style:
-                                                        TextStyle(fontSize: 20),
-                                                  ),
-                                                ),
-                                              ),
-                                            )),
-                                      ),
-                                      SizedBox(
-                                        height: 10,
-                                      ),
-                                      RaisedButton(
-                                        onPressed: () {
-                                          Navigator.push(
-                                              context,
-                                              MaterialPageRoute(
-                                                  builder: (context) =>
-                                                      SignUpPage()));
-                                        },
-                                        child: Expanded(
-                                          child: Container(
-                                            width: 250,
-                                            child: ListTile(
-                                              leading: Icon(Icons.person),
-                                              title: Text(
-                                                "Sign Up",
-                                                style: TextStyle(fontSize: 20),
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                      )
-                                    ],
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ));
-                    } else {
-                      return HomePage();
-                    }
+                   return GetStarted();
                   }
-                  return Container(
-                    height: 100,
-                    width: 100,
-                    child: Center(
-                      child: CircularProgressIndicator(
-                        backgroundColor: Colors.white,
-                      ),
-                    ),
-                  );
+                  return Center(
+                      child: Container(
+                          height: 30,
+                          width: 30,
+                          child: CircularProgressIndicator(
+                            backgroundColor: Colors.red,
+                          )));
                 });
           }
-          return Text("Loadinng......");
         });
   }
 }
